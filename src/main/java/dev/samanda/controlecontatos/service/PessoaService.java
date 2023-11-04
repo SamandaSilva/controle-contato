@@ -1,6 +1,7 @@
 package dev.samanda.controlecontatos.service;
 
 import dev.samanda.controlecontatos.model.Pessoa;
+import dev.samanda.controlecontatos.model.dto.PessoaCriacaoDto;
 import dev.samanda.controlecontatos.model.dto.PessoaMalaDireta;
 import dev.samanda.controlecontatos.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
@@ -33,7 +34,15 @@ public class PessoaService {
     }
 
     @Transactional
-    public Pessoa create(Pessoa pessoa){
+    public Pessoa create(PessoaCriacaoDto pessoaDto){
+        Pessoa pessoa = new Pessoa();
+
+        pessoa.setNome(pessoaDto.nome());
+        pessoa.setEndereco(pessoaDto.endereco());
+        pessoa.setCep(pessoaDto.cep());
+        pessoa.setCidade(pessoaDto.cidade());
+        pessoa.setUf(pessoaDto.uf());
+
         return repository.save(pessoa);
     }
 

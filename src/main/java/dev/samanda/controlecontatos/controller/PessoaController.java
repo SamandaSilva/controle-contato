@@ -1,6 +1,7 @@
 package dev.samanda.controlecontatos.controller;
 
 import dev.samanda.controlecontatos.model.Pessoa;
+import dev.samanda.controlecontatos.model.dto.PessoaCriacaoDto;
 import dev.samanda.controlecontatos.model.dto.PessoaMalaDireta;
 import dev.samanda.controlecontatos.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +46,7 @@ public class PessoaController {
     @Operation(summary = "Criar Pessoa")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Pessoa> create(@RequestBody @Valid Pessoa pessoa){
+    public ResponseEntity<Pessoa> create(@RequestBody @Valid PessoaCriacaoDto pessoa){
         return ResponseEntity.status(201).body(service.create(pessoa));
     }
 
