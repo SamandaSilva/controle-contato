@@ -26,3 +26,29 @@ Este projeto consiste em uma aplicação Java com Spring Boot que permite o gere
 - JPA/Hibernate
 - Banco de Dados MySQL
 - OpenAPI (Swagger)
+
+## Como Executar
+
+**Pré-requisitos:**
+- Java JDK 8 ou posterior instalado.
+- MySQL instalado e configurado corretamente.
+
+1. **Clonando o Repositório:**
+
+   Para clonar o repositório do projeto para o seu ambiente local, execute o seguinte comando:
+   
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+
+3. **Configurando o Banco de Dados:**
+
+   - Certifique-se de que você tenha um banco de dados MySQL configurado. Você pode criar um novo banco de dados se necessário.
+   - No arquivo `application.properties`, localizado no diretório de recursos do projeto, configure as propriedades do banco de dados, incluindo a URL, nome de usuário e senha de acordo com a sua configuração.
+
+
+4. **Acessando a Documentação da API:**
+
+   Após a conclusão da inicialização, a documentação da API estará disponível no Swagger. Abra um navegador da web e acesse o seguinte URL:
+   
+   http://localhost:8080/swagger-ui/index.html#/
+   
+   Na documentação do Swagger, você encontrará informações detalhadas sobre os endpoints disponíveis e como usá-los.
