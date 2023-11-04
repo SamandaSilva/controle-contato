@@ -6,6 +6,7 @@ import dev.samanda.controlecontatos.model.dto.ContatoAtualizacaoDto;
 import dev.samanda.controlecontatos.model.dto.ContatoCriacaoDto;
 import dev.samanda.controlecontatos.repository.ContatoRepository;
 import dev.samanda.controlecontatos.repository.PessoaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class ContatoService {
         return contatoRepository.findAll();
     }
 
+    @Transactional
     public Contato create(ContatoCriacaoDto contatoCriacaoDto){
         this.validaTipoContato(contatoCriacaoDto.tipoContato());
 
@@ -52,8 +54,12 @@ public class ContatoService {
         return contatoRepository.save(contatoBD);
     }
 
+    @Transactional
     public void delete(Long id){
-        contatoRepository.deleteById(id);
+        Contato contatoBD = this.findById(id);
+
+        contatoRepository.delete(contatoBD);
+        contatoRepository.flush();
     }
 
     private void validaTipoContato(Integer tipoContato) {
@@ -61,6 +67,7 @@ public class ContatoService {
             throw new IllegalArgumentException("Tipo de contato inválido.\nValores aceitos:\n0- Telefone\n1- Celular");
         }
     }
+
     private Pessoa buscaPessoa(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("A pessoa informada não existe. Por favor, cadastre-a antes do contato."));

@@ -3,6 +3,7 @@ package dev.samanda.controlecontatos.service;
 import dev.samanda.controlecontatos.model.Pessoa;
 import dev.samanda.controlecontatos.model.dto.PessoaMalaDireta;
 import dev.samanda.controlecontatos.repository.PessoaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class PessoaService {
         return repository.findAll();
     }
 
+    @Transactional
     public Pessoa create(Pessoa pessoa){
         return repository.save(pessoa);
     }
@@ -47,7 +49,11 @@ public class PessoaService {
         return repository.save(pessoaBD);
     }
 
+    @Transactional
     public void delete(Long id){
-        repository.deleteById(id);
+        Pessoa pessoaBD = this.findById(id);
+
+        repository.delete(pessoaBD);
+        repository.flush();
     }
 }

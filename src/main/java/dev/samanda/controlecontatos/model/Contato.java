@@ -1,5 +1,6 @@
 package dev.samanda.controlecontatos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class Contato {
     private String contato;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_pessoa", nullable = false)
+    @JoinColumn(name = "id_pessoa")
+    @JsonBackReference
     private Pessoa pessoa;
 }
